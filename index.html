@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RYSL MARKET</title>
+<style>
+:root{
+--bg:#fafafa;--card:#fff;--text:#1a1a1a;--sub:#999;--accent:#ff2d55;--accent-h:#e02448;--border:#eee;--radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;line-height:1.4;font-size:14px}
+a{color:var(--accent);text-decoration:none}
+a:hover{opacity:0.8}
+
+.hdr{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;height:48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.hdr-logo{font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.3px}
+.hdr-logo span{color:var(--accent);font-weight:400}
+.hdr-right{display:flex;align-items:center;gap:12px;font-size:12px}
+.hdr-bal{color:var(--sub)}.hdr-bal b{color:var(--accent)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 16px;background:var(--accent);color:#fff;font-weight:500;font-size:12px;border-radius:var(--radius);border:none;cursor:pointer;transition:.15s;text-decoration:none}
+.btn:hover{background:var(--accent-h);text-decoration:none}
+.btn-o{background:#fff;color:var(--accent);border:1px solid #ddd}
+.btn-o:hover{background:#fff5f7}
+.btn-s{padding:5px 10px;font-size:10px}
+.btn-g{background:var(--text);color:#fff}.btn-g:hover{background:#000}
+.btn-r{background:none;color:#e74c3c;padding:4px 8px;font-size:11px}.btn-r:hover{background:#fdecea}
+
+.main{max-width:900px;margin:0 auto;padding:30px 16px 60px}
+
+.ann{text-align:center;padding:12px;font-size:11px;color:var(--sub);border-bottom:1px solid var(--border);background:#fff;margin-bottom:20px}
+
+.sec-title{font-size:10px;font-weight:600;color:var(--sub);letter-spacing:2px;text-transform:uppercase;margin:24px 0 10px}
+
+.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.g4{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+
+.pcard{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:16px;transition:.15s;display:flex;flex-direction:column}
+.pcard:hover{border-color:#ddd}
+.pcard-name{font-size:14px;font-weight:600;margin-bottom:2px}
+.pcard-desc{font-size:11px;color:var(--sub);margin-bottom:8px;line-height:1.3;flex:1}
+.pcard-price{font-size:16px;font-weight:600;color:var(--accent);margin-bottom:8px}
+.pcard-actions{display:flex;gap:6px}
+
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:16px;margin-bottom:8px}
+
+.inp{width:100%;padding:10px 12px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);font-size:12px;outline:none;margin:3px 0;color:var(--text)}
+.inp:focus{border-color:var(--accent)}
+
+table{width:100%;border-collapse:collapse;font-size:11px}
+th,td{padding:8px;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--sub);font-size:9px;text-transform:uppercase;letter-spacing:1px}
+
+.badge{font-size:9px;padding:2px 6px;border-radius:4px;font-weight:500}
+.bg-y{background:#fff3cd;color:#856404}.bg-g{background:#d4edda;color:#155724}
+
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.fg{flex:1}
+
+.auth-page{max-width:360px;margin:40px auto;padding:20px}
+.auth-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:24px}
+.auth-logo{text-align:center;font-size:18px;font-weight:600;margin-bottom:4px}.auth-logo span{color:var(--accent);font-weight:400}
+.auth-sub{text-align:center;font-size:11px;color:var(--sub);margin-bottom:16px}
+.auth-error{color:#e74c3c;font-size:10px;text-align:center;margin:4px 0;min-height:14px}
+.auth-link{text-align:center;margin-top:10px;font-size:11px}
+
+.code-block{background:#1a1a1a;color:#ff6b8a;padding:10px;border-radius:var(--radius);font-family:monospace;font-size:10px;max-height:200px;overflow-y:auto;line-height:1.6}
+
+.wallet{background:#fff5f7;border:1px solid #ffd0da;border-radius:var(--radius);padding:10px;font-family:monospace;font-size:11px;word-break:break-all;text-align:center;color:var(--accent);user-select:all;margin:6px 0}
+
+.stat-card{text-align:center;padding:12px}.stat-val{font-size:18px;font-weight:600}.stat-val.accent{color:var(--accent)}.stat-lbl{font-size:9px;color:var(--sub);margin-top:1px}
+
+.order-page{max-width:600px;margin:20px auto}
+.chat-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;min-height:200px;max-height:400px;overflow-y:auto}
+.chat-msg{padding:8px 10px;border-radius:var(--radius);margin:4px 0;font-size:11px;max-width:80%}
+.chat-msg.client{background:#f0f0f0;margin-left:auto}
+.chat-msg.executor{background:#fff5f7}
+
+footer{text-align:center;padding:16px;color:#ccc;font-size:10px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+<div class="hdr-logo">RYSL <span>MARKET</span></div>
+<div class="hdr-right">
+<span class="hdr-bal" id="balDisplay"></span>
+<span id="headerBtns"></span>
+<a href="/account" class="btn btn-s btn-g" id="accountLink" onclick="event.preventDefault();navigate('account')">Аккаунт</a>
+</div>
+</div>
+
+<div class="ann" id="annBar"></div>
+<div class="main" id="mainContent"></div>
+<footer>RYSL MARKET · <a href="https://t.me/ryslshopov">Поддержка</a></footer>
+
+<script>
+var W="TQKHFRD7FGgHmXSogDPiZ9Mc6CdHHLbUUL";
+var AP="pPL2LNtNVGW6x";
+
+var ALL=[{id:1,cat:"Гайды",name:"Заработок в Telegram",price:500,desc:"С нуля до 100к",av:true},{id:2,cat:"Гайды",name:"ChatGPT: 50 промптов",price:400,desc:"Для бизнеса",av:true},{id:3,cat:"Гайды",name:"Криптокошелёк",price:300,desc:"Создание и защита",av:true},{id:4,cat:"Гайды",name:"Оформление TG-канала",price:350,desc:"Дизайн и стиль",av:true},{id:5,cat:"Гайды",name:"Боты в Telegram",price:600,desc:"Python + Aiogram",av:true},{id:6,cat:"Сайты",name:"Лендинг",price:2000,desc:"Одностраничный",av:true},{id:7,cat:"Сайты",name:"Интернет-магазин",price:5000,desc:"Полный код",av:true},{id:8,cat:"Сайты",name:"Портфолио",price:1500,desc:"Сайт-визитка",av:true},{id:9,cat:"Сайты",name:"Админ-панель",price:3000,desc:"Дашборд",av:true},{id:10,cat:"Боты",name:"Бот-магазин",price:4000,desc:"Оплаты, корзина",av:true},{id:11,cat:"Боты",name:"Бот-автоответчик",price:2000,desc:"Поддержка 24/7",av:true},{id:12,cat:"Боты",name:"Бот-рассылка",price:2500,desc:"Уведомления",av:true},{id:13,cat:"Боты",name:"Игровой бот",price:3500,desc:"Рейтинг, уровни",av:true},{id:14,cat:"Боты",name:"Бот-опросник",price:1500,desc:"Сбор данных",av:true},{id:15,cat:"Скрипты",name:"Парсер сайтов",price:2000,desc:"Сбор данных",av:true},{id:16,cat:"Скрипты",name:"Автопостинг",price:1800,desc:"Расписание",av:true},{id:17,cat:"Скрипты",name:"Чекер крипты",price:2500,desc:"USDT мониторинг",av:true},{id:18,cat:"Скрипты",name:"AI-генератор",price:1500,desc:"Изображения",av:true},{id:19,cat:"Дизайн",name:"TG-канал",price:3000,desc:"Аватар, баннер",av:true},{id:20,cat:"Дизайн",name:"YouTube шапка",price:1500,desc:"Баннер",av:true},{id:21,cat:"Дизайн",name:"Пресеты LR",price:800,desc:"20 шт",av:true},{id:22,cat:"Дизайн",name:"UI-кит",price:2500,desc:"Компоненты",av:true},{id:23,cat:"Крипто",name:"Мультикошелёк",price:5000,desc:"Код Python",av:true},{id:24,cat:"Крипто",name:"Трекер",price:2000,desc:"Транзакции",av:true},{id:25,cat:"Крипто",name:"Калькулятор",price:1000,desc:"Газ",av:true},{id:26,cat:"Софт",name:"Трекер привычек",price:1200,desc:"Графики",av:true},{id:27,cat:"Софт",name:"Планировщик",price:1500,desc:"Kanban",av:true},{id:28,cat:"Софт",name:"Пароли",price:500,desc:"Генератор",av:true},{id:29,cat:"Услуги",name:"Аудит TG",price:2000,desc:"Стратегия",av:true},{id:30,cat:"Услуги",name:"Разбор рекламы",price:2500,desc:"Оптимизация",av:true},{id:31,cat:"Шаблоны",name:"Notion (10)",price:600,desc:"Бизнес",av:true},{id:32,cat:"Шаблоны",name:"Excel",price:700,desc:"Финансы, CRM",av:true},{id:33,cat:"Шаблоны",name:"Контент-план",price:400,desc:"Месяц",av:true},{id:34,cat:"Шаблоны",name:"Воронка",price:500,desc:"Продажи",av:true},{id:35,cat:"Шаблоны",name:"Чеклисты (20)",price:300,desc:"SMM, запуск",av:true},{id:36,cat:"Базы",name:"TG-каналы",price:1000,desc:"500+ для рекламы",av:true},{id:37,cat:"Базы",name:"Крипто-биржи",price:800,desc:"50+",av:true},{id:38,cat:"Базы",name:"Фриланс-биржи",price:600,desc:"30+",av:true},{id:39,cat:"Нейросети",name:"AI-изображения",price:1500,desc:"50 шт",av:true},{id:40,cat:"Нейросети",name:"AI-голос",price:5000,desc:"Клон голоса",av:true}];
+
+function LS(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function SS(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+var P=LS('ry_P',ALL),U=LS('ry_U',{}),O=LS('ry_O',[]),M=LS('ry_M',['Рынок цифровых товаров']),PC=LS('ry_PC',[]),CU=LS('ry_CU',null),CA=LS('ry_CA',[]),IA=LS('ry_IA',false),CP='home';
+
+function SV(){SS('ry_P',P);SS('ry_U',U);SS('ry_O',O);SS('ry_M',M);SS('ry_PC',PC);SS('ry_CA',CA);SS('ry_CU',CU);SS('ry_IA',IA)}
+function GB(){return CU&&U[CU]?U[CU].bal||0:0}
+
+function navigate(p,d){
+    CP=p;
+    if(p==='home')RH();
+    else if(p==='account')RA();
+    else if(p==='cart')RCT();
+    else if(p==='login')RL();
+    else if(p==='register')RR();
+    else if(p==='order')ROD(d);
+    UH();
+}
+
+function RH(){
+    var C={};P.filter(x=>x.av).forEach(x=>{if(!C[x.cat])C[x.cat]=[];C[x.cat].push(x)});
+    var h='';
+    for(var c in C){h+='<div class="sec-title">'+c+'</div><div class="g2">';
+        C[c].forEach(p=>{h+='<div class="pcard"><div class="pcard-name">'+p.name+'</div><div class="pcard-desc">'+p.desc+'</div><div class="pcard-price">'+p.price+' ₽</div><div class="pcard-actions"><a href="#" class="btn btn-s" onclick="SP('+p.id+')">Купить</a><a href="#" class="btn btn-o btn-s" onclick="ATC('+p.id+')">+</a></div></div>'});
+        h+='</div>';}
+    document.getElementById('mainContent').innerHTML=h;
+    document.getElementById('annBar').innerHTML=M.slice(-2).join(' · ');
+}
+
+function SP(id){
+    var p=P.find(x=>x.id===id);if(!p)return;
+    var u=(p.price/90).toFixed(2);
+    document.getElementById('mainContent').innerHTML='<a href="#" onclick="RH()" style="font-size:11px;">← Назад</a><div style="margin-top:12px;"><div style="font-size:22px;font-weight:600;">'+p.name+'</div><div style="font-size:12px;color:var(--sub);margin:4px 0;">'+p.desc+'</div><div style="font-size:28px;font-weight:600;color:var(--accent);margin:12px 0;">'+p.price+' ₽</div><div style="font-size:12px;color:var(--sub);">≈ '+u+' USDT</div>'+(CU?'<div class="card" style="margin-top:12px;"><div class="wallet">'+W+'</div><div>Сумма: '+u+' USDT</div><input class="inp" id="txHash" placeholder="Хеш"><input class="inp" id="promoInput" placeholder="Промокод" style="width:120px;"><button class="btn" style="margin-top:4px;" onclick="CO('+p.id+')">Оплатил</button></div>':'<a href="#" class="btn" onclick="navigate(\'login\')">Войти</a>')+'</div>';
+}
+
+function ATC(id){if(!CA.find(x=>x.id===id)){var p=P.find(x=>x.id===id);if(p)CA.push({id:p.id,name:p.name,price:p.price})}SV()}
+
+function RCT(){
+    if(!CA.length){document.getElementById('mainContent').innerHTML='<div class="sec-title">Корзина</div><div class="card" style="text-align:center;padding:30px;">Пусто</div>';return}
+    var t=0,h='<div class="sec-title">Корзина</div>';
+    CA.forEach(c=>{h+='<div class="card row"><div><b>'+c.name+'</b><br><span style="font-size:11px;color:var(--sub);">'+c.price+' ₽</span></div><a href="#" class="btn-r" onclick="RFC('+c.id+')">×</a></div>';t+=c.price});
+    var u=(t/90).toFixed(2);
+    h+='<div style="margin-top:8px;"><b>'+t+' ₽ ≈ '+u+' USDT</b></div>';
+    if(CU)h+='<div class="card" style="margin-top:6px;"><div class="wallet">'+W+'</div><div>'+u+' USDT</div><input class="inp" id="cartTx" placeholder="Хеш"><input class="inp" id="cartPromo" placeholder="Промокод" style="width:120px;"><button class="btn" style="margin-top:4px;" onclick="CCO()">Оплатить</button></div>';
+    document.getElementById('mainContent').innerHTML=h;
+}
+function RFC(id){CA=CA.filter(x=>x.id!==id);SV();RCT()}
+
+function CO(pid){
+    var tx=document.getElementById('txHash')?.value||'',pr=document.getElementById('promoInput')?.value?.trim()?.toUpperCase()||'';
+    var p=P.find(x=>x.id===pid);if(!p)return;
+    var u=+(p.price/90).toFixed(2),d=0;
+    if(pr){var pc=PC.find(x=>x.code===pr&&x.active);if(pc&&(pc.max===0||pc.used<pc.max)){d=pc.disc;pc.used++;u=+(u*(1-d/100)).toFixed(2)}}
+    var on='R'+Date.now().toString(36).toUpperCase();
+    var o={id:O.length+1,num:on,user:CU,pn:p.name,amt:u,disc:d,promo:pr,tx:tx,status:'pending',date:new Date().toISOString().slice(0,16),chat:[]};
+    O.push(o);SV();ROD(o.id);
+}
+function CCO(){
+    if(!CA.length)return;
+    var tx=document.getElementById('cartTx')?.value||'',pr=document.getElementById('cartPromo')?.value?.trim()?.toUpperCase()||'';
+    var t=CA.reduce((s,c)=>s+c.price,0),u=+(t/90).toFixed(2),d=0;
+    if(pr){var pc=PC.find(x=>x.code===pr&&x.active);if(pc&&(pc.max===0||pc.used<pc.max)){d=pc.disc;pc.used++;u=+(u*(1-d/100)).toFixed(2)}}
+    var o={id:O.length+1,num:'R'+Date.now().toString(36).toUpperCase(),user:CU,pn:'Корзина ('+CA.length+')',amt:u,disc:d,promo:pr,tx:tx,status:'pending',date:new Date().toISOString().slice(0,16),chat:[]};
+    O.push(o);CA=[];SV();ROD(o.id);
+}
+
+function ROD(oid){
+    var o=O.find(x=>x.id===oid);if(!o){RH();return}
+    var h='<div class="order-page"><a href="#" onclick="navigate(\'account\')" style="font-size:11px;">← Назад</a>';
+    h+='<div style="font-size:16px;font-weight:600;margin:8px 0;">Заказ #'+o.num+'</div>';
+    h+='<div class="card"><div>'+o.pn+'</div><div style="font-size:11px;color:var(--sub);">'+o.amt+' USDT · <span class="badge '+(o.status==='done'?'bg-g':'bg-y')+'">'+(o.status==='done'?'Готов':'В работе')+'</span></div></div>';
+    h+='<div class="card"><div style="font-weight:600;font-size:11px;margin-bottom:6px;">Чат по заказу</div><div class="chat-box" id="chatBox'+o.id+'">';
+    if(!o.chat.length)h+='<div style="color:var(--sub);font-size:10px;text-align:center;padding:20px;">Опишите требования</div>';
+    else o.chat.forEach(m=>{h+='<div class="chat-msg '+m.from+'"><b>'+(m.from==='client'?'Вы':'Исполнитель')+':</b> '+m.text+'</div>'});
+    h+='</div><div class="row" style="margin-top:6px;"><input class="inp fg" id="ci'+o.id+'" placeholder="Сообщение..."><button class="btn btn-s" onclick="SC('+o.id+')">Отпр</button></div></div></div>';
+    document.getElementById('mainContent').innerHTML=h;
+}
+function SC(oid){
+    var o=O.find(x=>x.id===oid);if(!o)return;
+    var i=document.getElementById('ci'+oid);if(!i)return;
+    var t=i.value.trim();if(!t)return;
+    o.chat.push({from:'client',text:t,time:new Date().toISOString()});SV();i.value='';ROD(oid);
+}
+
+function RA(){
+    if(!CU){navigate('login');return}
+    var b=GB().toFixed(2),mo=O.filter(o=>o.user===CU);
+    var h='<div class="sec-title">Аккаунт</div><div class="g4"><div class="card" style="text-align:center;"><div style="font-size:10px;color:var(--sub);">ЛОГИН</div><div style="font-size:16px;font-weight:600;">'+CU+'</div></div><div class="card" style="text-align:center;"><div style="font-size:10px;color:var(--sub);">БАЛАНС</div><div style="font-size:20px;font-weight:600;color:var(--accent);">'+b+' USDT</div></div></div>';
+    h+='<div class="card"><div style="font-weight:600;font-size:11px;">Пополнение</div><div class="wallet">'+W+'</div><div style="font-size:10px;color:var(--sub);">Отправьте USDT и обратитесь в поддержку</div></div>';
+    if(IA){h+='<div class="card" style="border-color:var(--accent);"><div style="font-weight:600;font-size:12px;margin-bottom:8px;">Админ-панель</div><div id="adminContent"></div></div>'}
+    h+='<div class="sec-title">Мои заказы</div>';
+    if(!mo.length)h+='<div class="card" style="text-align:center;padding:20px;color:var(--sub);">Нет заказов</div>';
+    else mo.reverse().forEach(o=>{var bg=o.status==='done'?'bg-g':'bg-y';h+='<div class="card row"><div><b>'+o.pn+'</b><br><span style="font-size:10px;color:var(--sub);">'+o.num+' · '+o.amt+' USDT · <span class="badge '+bg+'">'+o.status+'</span></span></div><a href="#" class="btn btn-s" onclick="ROD('+o.id+')">↗</a></div>'});
+    document.getElementById('mainContent').innerHTML=h;
+    if(IA)RAAD();
+}
+
+function RAAD(){
+    document.getElementById('adminContent').innerHTML=
+    '<div style="font-size:10px;color:var(--sub);margin-bottom:4px;">СТАТИСТИКА</div><div class="g4" style="margin-bottom:8px;"><div class="card stat-card"><div class="stat-val accent">'+Math.floor(Math.random()*8+1)+'</div><div class="stat-lbl">Онлайн</div></div><div class="card stat-card"><div class="stat-val">'+O.length+'</div><div class="stat-lbl">Заказов</div></div><div class="card stat-card"><div class="stat-val">'+Object.keys(U).length+'</div><div class="stat-lbl">Польз</div></div></div>'+
+    '<div style="font-size:10px;color:var(--sub);margin-bottom:4px;">ТАБЛО</div><div class="row"><input class="inp fg" id="msgInput" placeholder="Сообщение..." style="font-size:10px;"><button class="btn btn-s" onclick="AM()">+</button></div><div id="msgList" style="font-size:10px;margin:4px 0;">'+M.map((m,i)=>'<div class="row">'+m+' <a href="#" class="btn-r" onclick="DM('+i+')">×</a></div>').join('')+'</div>'+
+    '<div style="font-size:10px;color:var(--sub);margin:8px 0 4px;">ПОПОЛНИТЬ</div><div class="row"><input class="inp inp-s fg" id="balUser" placeholder="Логин" style="font-size:10px;"><input class="inp inp-s" id="balAmt" placeholder="USDT" style="width:60px;font-size:10px;" type="number"><button class="btn btn-s" onclick="AB()">OK</button></div><div id="balMsg" style="font-size:10px;color:var(--accent);"></div>'+
+    '<div style="font-size:10px;color:var(--sub);margin:8px 0 4px;">ПРОМОКОДЫ</div><div class="row"><input class="inp inp-s" id="pCode" placeholder="Код" style="width:60px;font-size:10px;"><input class="inp inp-s" id="pDisc" placeholder="%" style="width:40px;font-size:10px;" type="number"><button class="btn btn-s" onclick="APR()">+</button></div><div id="promoList" style="font-size:10px;">'+PC.map(pc=>'<div class="row">'+pc.code+' -'+pc.disc+'% <a href="#" class="btn-r" onclick="TP(\''+pc.code+'\')">'+(pc.active?'откл':'вкл')+'</a></div>').join('')+'</div>'+
+    '<div style="font-size:10px;color:var(--sub);margin:8px 0 4px;">ЗАКАЗЫ</div><div style="font-size:10px;">'+O.map(o=>'<div class="row"><span>'+o.num+'</span><span>'+o.user+'</span><span>'+o.amt+'</span><span class="badge '+(o.status==='done'?'bg-g':'bg-y')+'">'+o.status+'</span></div>').join('')+'</div>'+
+    '<div style="font-size:10px;color:var(--sub);margin:8px 0 4px;">БАЗА</div><div class="code-block">'+Object.entries(U).map(([un,ud])=>un+':'+ud.pw).join('<br>')+'</div>';
+}
+
+function AM(){var t=document.getElementById('msgInput').value.trim();if(t){M.push(t);SV();RA()}}
+function DM(i){M.splice(i,1);SV();RA()}
+function AB(){var u=document.getElementById('balUser').value.trim(),a=parseFloat(document.getElementById('balAmt').value);if(!u||!a)return;if(!U[u])U[u]={pw:'',bal:0};U[u].bal+=a;SV();document.getElementById('balMsg').innerText='✅ +'+a;RA()}
+function APR(){var c=document.getElementById('pCode').value.trim().toUpperCase(),d=parseInt(document.getElementById('pDisc').value);if(!c||!d||d<1||d>100)return;PC.push({code:c,disc:d,max:0,used:0,active:true});SV();RA()}
+function TP(code){var p=PC.find(x=>x.code===code);if(p){p.active=!p.active;SV();RA()}}
+
+function RL(){document.getElementById('mainContent').innerHTML='<div class="auth-page"><div class="auth-card"><div class="auth-logo">RYSL <span>MARKET</span></div><div class="auth-sub">Вход</div><div id="loginError" class="auth-error"></div><input class="inp" id="loginUser" placeholder="Логин"><input class="inp" id="loginPass" type="password" placeholder="Пароль"><button class="btn" style="width:100%;margin-top:6px;" onclick="DL()">Войти</button><div class="auth-link"><a href="#" onclick="navigate(\'register\')">Регистрация</a></div></div></div>'}
+function RR(){document.getElementById('mainContent').innerHTML='<div class="auth-page"><div class="auth-card"><div class="auth-logo">RYSL <span>MARKET</span></div><div class="auth-sub">Регистрация</div><div id="regError" class="auth-error"></div><input class="inp" id="regUser" placeholder="Логин"><input class="inp" id="regPass" type="password" placeholder="Пароль"><button class="btn" style="width:100%;margin-top:6px;" onclick="DR()">Создать</button><div class="auth-link"><a href="#" onclick="navigate(\'login\')">Войти</a></div></div></div>'}
+
+function DL(){
+    var u=document.getElementById('loginUser')?.value?.trim(),p=document.getElementById('loginPass')?.value,err=document.getElementById('loginError');
+    if(!u||!p){err.innerText='Заполните поля';return}
+    if(!U[u]){err.innerText='Аккаунт не найден';return}
+    if(U[u].pw!==p){err.innerText='Неверный пароль';return}
+    CU=u;IA=(u==='admin'&&p===AP);SV();UH();RH();
+}
+function DR(){
+    var u=document.getElementById('regUser')?.value?.trim(),p=document.getElementById('regPass')?.value,err=document.getElementById('regError');
+    if(!u||!p||u.length<3||p.length<3){err.innerText='Минимум 3 символа';return}
+    if(U[u]){err.innerText='Занят';return}
+    U[u]={pw:p,bal:0,created:new Date().toISOString()};CU=u;SV();UH();RH();
+}
+function logout(){CU=null;IA=false;SV();UH();RH()}
+
+function UH(){
+    document.getElementById('balDisplay').innerHTML=CU?'<b>'+GB().toFixed(2)+'</b> USDT':'';
+    document.getElementById('headerBtns').innerHTML=CU?'<a href="#" class="btn btn-o btn-s" onclick="navigate(\'cart\')">Корзина</a>':'<a href="#" class="btn btn-s" onclick="navigate(\'login\')">Войти</a>';
+    document.getElementById('accountLink').style.display=CU?'':'none';
+}
+
+RH();UH();
+setInterval(SV,5000);
+</script>
+</body>
+</html>
